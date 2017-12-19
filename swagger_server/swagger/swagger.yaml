@@ -1,0 +1,128 @@
+---
+swagger: "2.0"
+info:
+  description: "The FlaSi webservice connects the HomeLynk system to the outside world.\
+    \ It is the main entry point into the Selficient house. It gives the user the\
+    \ possibility to read the MySQL database that is connected to the house, as well\
+    \ as send signals to the local domotica objects"
+  version: "0.0.1"
+  title: "FlaSi"
+paths:
+  /domotica:
+    get:
+      tags:
+      - "Domotica"
+      description: "Gets `Domotica` objects of the household. Corresponds to the objects\
+        \ that can be interacted with from the outside.\n"
+      operationId: "domotica_get"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: "array"
+            title: "ArrayOfDomoticaObjects"
+            items:
+              $ref: "#/definitions/Domotica"
+        500:
+          description: "Internal error"
+      x-swagger-router-controller: "swagger_server.controllers.domotica_controller"
+  /domotica/domoticaid:
+    get:
+      tags:
+      - "Domotica"
+      description: "Gets the specific information from one Domotica object. \n"
+      operationId: "domotica_domoticaid_get"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/DomoticaObject"
+      x-swagger-router-controller: "swagger_server.controllers.domotica_controller"
+  /domotica/{domoticaid}:
+    post:
+      tags:
+      - "Domotica"
+      description: "Activates a specific domotica object \n"
+      operationId: "domotica_domoticaid_post"
+      parameters:
+      - name: "domoticaid"
+        in: "path"
+        description: "Numeric ID of the Domotica to activate"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Succesful response"
+      x-swagger-router-controller: "swagger_server.controllers.domotica_controller"
+  /query:
+    get:
+      tags:
+      - "MySQL"
+      description: "Returns the needed parameters for running a MySQL query in the\
+        \ current location\n"
+      operationId: "query_get"
+      parameters: []
+      responses:
+        200:
+          description: "Succesful response"
+          schema:
+            type: "array"
+            title: "ArrayOfParameters"
+            items:
+              $ref: "#/definitions/Domotica"
+        500:
+          description: "Internal Error"
+      x-swagger-router-controller: "swagger_server.controllers.my_sql_controller"
+  /query/execute:
+    post:
+      tags:
+      - "MySQL"
+      description: "Executes the query\n"
+      operationId: "query_execute_post"
+      parameters:
+      - in: "body"
+        name: "Parameters"
+        description: "Array of Parameters of the query."
+        required: true
+        schema:
+          title: "ArrayOfParameters"
+          type: "array"
+          items:
+            $ref: "#/definitions/Parameters"
+      responses:
+        200:
+          description: "Succesful response"
+        500:
+          description: "Error reaching MySQL"
+        501:
+          description: "Error executing query"
+      x-swagger-router-controller: "swagger_server.controllers.my_sql_controller"
+definitions:
+  Parameters:
+    properties:
+      name:
+        type: "string"
+      type:
+        type: "string"
+      example:
+        type: "string"
+  Domotica:
+    properties:
+      name:
+        type: "string"
+      type:
+        type: "string"
+  DomoticaObject:
+    properties:
+      id:
+        type: "number"
+      name:
+        type: "string"
+      type:
+        type: "string"
+      description:
+        type: "string"
+      creationdate:
+        type: "string"
