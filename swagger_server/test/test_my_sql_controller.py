@@ -2,8 +2,8 @@
 
 from __future__ import absolute_import
 
-from swagger_server.models.domotica import Domotica
 from swagger_server.models.parameters import Parameters
+from swagger_server.models.parameters1 import Parameters1
 from . import BaseTestCase
 from six import BytesIO
 from flask import json
@@ -18,7 +18,7 @@ class TestMySQLController(BaseTestCase):
 
         
         """
-        Parameters = [Parameters()]
+        Parameters = [Parameters1()]
         response = self.client.open('/query/execute',
                                     method='POST',
                                     data=json.dumps(Parameters),

@@ -1,0 +1,2 @@
+ID          | NAME            | TYPE            | DESCRIPTION                            | CREATIONDATE
+0           | LivingRoom      | Light           | Main light in the living room          | 19-12-2017

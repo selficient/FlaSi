@@ -7,6 +7,9 @@ info:
     \ as send signals to the local domotica objects"
   version: "0.0.1"
   title: "FlaSi"
+  contact:
+    name: "Selficient - Hogeschool Utrecht, The Netherlands"
+    email: "mart.noten@student.hu.nl"
 paths:
   /domotica:
     get:
@@ -71,7 +74,7 @@ paths:
             type: "array"
             title: "ArrayOfParameters"
             items:
-              $ref: "#/definitions/Domotica"
+              $ref: "#/definitions/Parameters"
         500:
           description: "Internal Error"
       x-swagger-router-controller: "swagger_server.controllers.my_sql_controller"
@@ -79,7 +82,7 @@ paths:
     post:
       tags:
       - "MySQL"
-      description: "Executes the query\n"
+      description: "Executes the query \n"
       operationId: "query_execute_post"
       parameters:
       - in: "body"
@@ -90,7 +93,7 @@ paths:
           title: "ArrayOfParameters"
           type: "array"
           items:
-            $ref: "#/definitions/Parameters"
+            $ref: "#/definitions/Parameters_1"
       responses:
         200:
           description: "Succesful response"
@@ -106,13 +109,21 @@ definitions:
         type: "string"
       type:
         type: "string"
-      example:
-        type: "string"
   Domotica:
+    properties:
+      id:
+        type: "number"
+      name:
+        type: "string"
+      type:
+        type: "string"
+  Parameters_1:
     properties:
       name:
         type: "string"
       type:
+        type: "string"
+      example:
         type: "string"
   DomoticaObject:
     properties:

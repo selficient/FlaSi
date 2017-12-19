@@ -19,7 +19,7 @@ setup(
     name=NAME,
     version=VERSION,
     description="FlaSi",
-    author_email="",
+    author_email="mart.noten@student.hu.nl",
     url="",
     keywords=["Swagger", "FlaSi"],
     install_requires=REQUIRES,

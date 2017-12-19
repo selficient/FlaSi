@@ -14,7 +14,11 @@ def domotica_domoticaid_get():
 
     :rtype: DomoticaObject
     """
-    return 'do some magic!'
+
+    domoticafile = open("domotica-items.txt", "r")
+
+
+    return domoticafile.readline()
 
 
 def domotica_domoticaid_post(domoticaid):

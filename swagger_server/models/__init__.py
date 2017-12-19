@@ -5,3 +5,4 @@ from __future__ import absolute_import
 from .domotica import Domotica
 from .domotica_object import DomoticaObject
 from .parameters import Parameters
+from .parameters1 import Parameters1
