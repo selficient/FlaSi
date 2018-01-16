@@ -43,6 +43,9 @@ def query_execute_post(Parameters):
 
     queryresult = []
 
+    counter = 0
+    columnames = cursor.description
+
     for row in cursor:
         queryresult.append(row)
 
@@ -52,7 +55,8 @@ def query_execute_post(Parameters):
     cursor.close()
     connection.close()
 
-    return queryresult
+    objectlist = createObject(columnames, queryresult)
+    return objectlist
 
 
 def query_get():
@@ -66,3 +70,18 @@ def query_get():
 
 def customerror(errormessage, code):
     return Response('{"error":"' + errormessage + '"}', status=code, mimetype='application/json')
+
+def createObject(columnames, data):
+    newList = []
+    lengthOfColumnNames = len(columnames)
+    for row in data:
+        object = {}
+        counter = 0
+        for column in columnames:
+            object[column] : row[counter]
+            counter += 1
+            if counter > lengthOfColumnNames:
+                break
+    newList.append(object)
+
+    return newList
