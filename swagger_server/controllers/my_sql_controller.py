@@ -7,6 +7,7 @@ from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
 
 import pymysql
+from flask import Response
 
 def query_execute_post(Parameters):
     """
@@ -23,14 +24,22 @@ def query_execute_post(Parameters):
     query = "";
 
     connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='BDSD')
+    try:
+        cursor = connection.cursor()
+    except:
+        return customerror("Er kon geen verbinding worden gemaakt met de database", 500)
 
-    cursor = connection.cursor()
+    if len(Parameters) == 0:
+        return customerror("Er zijn geen parameters opgegeven", 500)
 
     for parameter in Parameters:
         if parameter.name == "query":
             query = parameter.value
 
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+    except:
+        return customerror("De Query kon niet uitgevoerd worden", 500)
 
     queryresult = []
 
@@ -54,3 +63,6 @@ def query_get():
     :rtype: List[Parameters]
     """
     return 'do some magic!'
+
+def customerror(errormessage, code):
+    return Response('{"error":"' + errormessage + '"}', status=code, mimetype='application/json')
