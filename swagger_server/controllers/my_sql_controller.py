@@ -6,6 +6,8 @@ from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
 
+import pymysql
+
 
 def query_execute_post(Parameters):
     """
@@ -16,8 +18,31 @@ def query_execute_post(Parameters):
 
     :rtype: None
     """
+    query = "";
+
+    connection = pymysql.connect(host='localhost', port=4000, user='root', passwd='', db='mysql')
+
+    cursor = connection.cursor()
+
+
+    print(cursor.description)
+
+    for key, value in Parameters.items():
+        if(key == "value"):
+            query = value
+
+    cursor.execute(query)
+
+
+    for row in cursor:
+        print(row)
+
     if connexion.request.is_json:
         Parameters = [Parameters1.from_dict(d) for d in connexion.request.get_json()]
+
+    cursor.close()
+    connection.close()
+
     return 'do some magic!'
 
 
@@ -29,3 +54,6 @@ def query_get():
     :rtype: List[Parameters]
     """
     return 'do some magic!'
+
+
+# port 4000 for MySQL stukje schrijven met input query Connectieopenen, query uitvoeren op connectie alles wat daar uit komt returnen
