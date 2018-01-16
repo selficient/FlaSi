@@ -5,7 +5,7 @@ from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
-
+from flask import Response
 
 def domotica_domoticaid_get():
     """
@@ -16,9 +16,10 @@ def domotica_domoticaid_get():
     """
 
     domoticafile = open("domotica-items.txt", "r")
+    print(domoticafile)
 
 
-    return domoticafile.readline()
+    return domoticafile.readline()  
 
 
 def domotica_domoticaid_post(domoticaid):
@@ -30,8 +31,15 @@ def domotica_domoticaid_post(domoticaid):
 
     :rtype: None
     """
-    return 'do some magic!'
+    with open("domotica-items.txt", "r") as domoticafile:
+        inputstring = domoticafile.readline().replace("\n","")
+        for line in domoticafile:
+                items = line.replace(" ", "").split("|")
+                print(items[0])
+                if items[0] == str(domoticaid):
+                    return createObject(inputstring,line)
 
+    return customerror("Geen item gevonden met dit ID", 501)
 
 def domotica_get():
     """
@@ -40,4 +48,20 @@ def domotica_get():
 
     :rtype: List[Domotica]
     """
-    return 'do some magic!'
+
+    with open("domotica-items.txt", "r") as domoticafile:
+        return domoticafile.read()
+
+def customerror(errormessage, code):
+    return Response('{"error":"' + errormessage + '"}', status=code, mimetype='application/json')
+
+def createObject(inputstring, outputstr):
+    objectcomponents = outputstr.replace(" ", "").split("|")
+    objectkeys = inputstring.replace(" ", "").split("|")
+    newdictionary = {}
+    counter = 0
+    for key in objectkeys:
+        newdictionary[key] = objectcomponents[counter]
+        counter += 1
+
+    return newdictionary
