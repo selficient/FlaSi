@@ -6,6 +6,7 @@ from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
 
+import pymysql
 
 def query_execute_post(Parameters):
     """
@@ -21,22 +22,20 @@ def query_execute_post(Parameters):
 
     query = "";
 
-    connection = pymysql.connect(host='localhost', port=4000, user='root', passwd='', db='mysql')
+    connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='BDSD')
 
     cursor = connection.cursor()
 
-
-    print(cursor.description)
-
-    for key, value in Parameters.items():
-        if(key == "value"):
-            query = value
+    for parameter in Parameters:
+        if parameter.name == "query":
+            query = parameter.value
 
     cursor.execute(query)
 
+    queryresult = []
 
     for row in cursor:
-        print(row)
+        queryresult.append(row)
 
     if connexion.request.is_json:
         Parameters = [Parameters1.from_dict(d) for d in connexion.request.get_json()]
@@ -44,7 +43,7 @@ def query_execute_post(Parameters):
     cursor.close()
     connection.close()
 
-    return 'do some magic!'
+    return queryresult
 
 
 def query_get():
