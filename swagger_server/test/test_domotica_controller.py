@@ -18,7 +18,7 @@ class TestDomoticaController(BaseTestCase):
 
         
         """
-        response = self.client.open('/domotica/domoticaid',
+        response = self.client.open('/domotica/{domoticaid}'.format(domoticaid=56),
                                     method='GET')
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 

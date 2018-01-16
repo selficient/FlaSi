@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="14c59694-f57a-48a4-9021-a0cb6f13656c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domotica-items.txt" afterPath="$PROJECT_DIR$/domotica-items.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger_server/controllers/domotica_controller.py" afterPath="$PROJECT_DIR$/swagger_server/controllers/domotica_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger_server/controllers/my_sql_controller.py" afterPath="$PROJECT_DIR$/swagger_server/controllers/my_sql_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger_server/models/parameters1.py" afterPath="$PROJECT_DIR$/swagger_server/models/parameters1.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger_server/swagger/swagger.yaml" afterPath="$PROJECT_DIR$/swagger_server/swagger/swagger.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger_server/test/test_domotica_controller.py" afterPath="$PROJECT_DIR$/swagger_server/test/test_domotica_controller.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +27,8 @@
       <file leaf-file-name="domotica_controller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/swagger_server/controllers/domotica_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="51" column="36" lean-forward="false" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+            <state relative-caret-position="-443">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -34,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/domotica-items.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="24" />
+              <caret line="1" column="119" lean-forward="false" selection-start-line="1" selection-start-column="119" selection-end-line="1" selection-end-column="119" />
               <folding />
             </state>
           </provider>
@@ -97,6 +103,12 @@
               <item name="FlaSi" type="b2602c69:ProjectViewProjectNode" />
               <item name="FlaSi" type="462c0819:PsiDirectoryNode" />
               <item name="swagger_server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FlaSi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FlaSi" type="462c0819:PsiDirectoryNode" />
+              <item name="swagger_server" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -291,18 +303,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/swagger_server/controllers/my_sql_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-129">
+          <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#16#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/domotica-items.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="24" />
+          <caret line="1" column="119" lean-forward="false" selection-start-line="1" selection-start-column="119" selection-end-line="1" selection-end-column="119" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/swagger_server/controllers/domotica_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="51" column="36" lean-forward="false" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+        <state relative-caret-position="-443">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

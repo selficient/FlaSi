@@ -5,7 +5,7 @@ info:
     \ It is the main entry point into the Selficient house. It gives the user the\
     \ possibility to read the MySQL database that is connected to the house, as well\
     \ as send signals to the local domotica objects"
-  version: "0.0.1"
+  version: "0.0.2"
   title: "FlaSi"
   contact:
     name: "Selficient - Hogeschool Utrecht, The Netherlands"
@@ -30,20 +30,24 @@ paths:
         500:
           description: "Internal error"
       x-swagger-router-controller: "swagger_server.controllers.domotica_controller"
-  /domotica/domoticaid:
+  /domotica/{domoticaid}:
     get:
       tags:
       - "Domotica"
       description: "Gets the specific information from one Domotica object. \n"
       operationId: "domotica_domoticaid_get"
-      parameters: []
+      parameters:
+      - name: "domoticaid"
+        in: "path"
+        description: "Numeric ID of the Domotica to activate"
+        required: true
+        type: "integer"
       responses:
         200:
           description: "Successful response"
           schema:
             $ref: "#/definitions/DomoticaObject"
       x-swagger-router-controller: "swagger_server.controllers.domotica_controller"
-  /domotica/{domoticaid}:
     post:
       tags:
       - "Domotica"
@@ -124,6 +128,8 @@ definitions:
       type:
         type: "string"
       example:
+        type: "string"
+      value:
         type: "string"
   DomoticaObject:
     properties:
