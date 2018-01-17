@@ -21,9 +21,10 @@ def query_execute_post(Parameters):
     if connexion.request.is_json:
         Parameters = [Parameters1.from_dict(d) for d in connexion.request.get_json()]
 
-    query = "";
+    query = ""
 
     connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='BDSD')
+
     try:
         cursor = connection.cursor()
     except:
@@ -44,7 +45,7 @@ def query_execute_post(Parameters):
     queryresult = []
 
     counter = 0
-    columnames = cursor.description
+    columnames = [i[0] for i in cursor.description]
 
     for row in cursor:
         queryresult.append(row)
@@ -73,15 +74,17 @@ def customerror(errormessage, code):
 
 def createObject(columnames, data):
     newList = []
-    lengthOfColumnNames = len(columnames)
+    lengthOfColumns = len(columnames)
+
     for row in data:
         object = {}
         counter = 0
         for column in columnames:
-            object[column] : row[counter]
+            object[column] = row[counter]
             counter += 1
-            if counter > lengthOfColumnNames:
+            if counter > lengthOfColumns:
                 break
-    newList.append(object)
+
+        newList.append(object)
 
     return newList
