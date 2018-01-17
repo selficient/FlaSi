@@ -8,7 +8,7 @@ from ..util import deserialize_date, deserialize_datetime
 
 import requests
 from flask import Response
-
+import config
 def domotica_domoticaid_get(domoticaid):
     """
     domotica_domoticaid_get
@@ -39,9 +39,9 @@ def domotica_domoticaid_post(domoticaid):
     """
     domoticafile = open("domotica-items.txt", "r")
 
-    username = "testuser"
-    password = "testpassword"
-    ipadresswebserver = "192.168.10.200"
+    username = config.homeLynkUsername
+    password = config.homeLynkPassword
+    ipadresswebserver = config.homeLynkIP
 
     domoticaobject = domotica_domoticaid_get(domoticaid)
     groupadress = domoticaobject['GROUP']

@@ -5,7 +5,7 @@ from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
-
+import config
 import pymysql
 from flask import Response
 
@@ -23,7 +23,8 @@ def query_execute_post(Parameters):
 
     query = ""
 
-    connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='BDSD')
+    connection = pymysql.connect(host=config.databaseIP, port=config.databasePort, user=config.databaseUsername,
+                                 passwd=config.databasePassword, db=config.databaseDatabasename)
 
     try:
         cursor = connection.cursor()
@@ -56,8 +57,13 @@ def query_execute_post(Parameters):
     cursor.close()
     connection.close()
 
-    objectlist = createObject(columnames, queryresult)
+    try:
+        objectlist = createObject(columnames, queryresult)
+    except:
+        return customerror("Er konden geen objecten aangemaakt worden voor de gegeven dataset", 500)
+
     return objectlist
+
 
 
 def query_get():
@@ -75,16 +81,16 @@ def customerror(errormessage, code):
 def createObject(columnames, data):
     newList = []
     lengthOfColumns = len(columnames)
+    if(lengthOfColumns != 0):
+        for row in data:
+            object = {}
+            counter = 0
+            for column in columnames:
+                object[column] = row[counter]
+                counter += 1
+                if counter > lengthOfColumns:
+                    break
 
-    for row in data:
-        object = {}
-        counter = 0
-        for column in columnames:
-            object[column] = row[counter]
-            counter += 1
-            if counter > lengthOfColumns:
-                break
-
-        newList.append(object)
+            newList.append(object)
 
     return newList
