@@ -25,7 +25,7 @@ def query_execute_post(Parameters):
 
     connection = pymysql.connect(host=config.databaseIP, port=config.databasePort, user=config.databaseUsername,
                                  passwd=config.databasePassword, db=config.databaseDatabasename)
-
+	
     try:
         cursor = connection.cursor()
     except:
