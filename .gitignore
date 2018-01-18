@@ -106,3 +106,6 @@ ENV/
 /.idea
 .DS_Store
 */.DS_Store
+/.tox
+/.tox/
+.tox/
