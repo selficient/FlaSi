@@ -45,7 +45,6 @@ def query_execute_post(Parameters):
 
     queryresult = []
 
-    counter = 0
     columnames = [i[0] for i in cursor.description]
 
     for row in cursor:
@@ -73,7 +72,15 @@ def query_get():
 
     :rtype: List[Parameters]
     """
-    return 'do some magic!'
+
+    exampleParameters = {
+        "name": "Naam van de parameter, bijvoorbeeld: query",
+        "type": "Type van de parameter, bijvoorbeeld: mysql-query",
+        "value": "Daadwerkelijke waarde van de parameter, bijvoorbeeld een select statement",
+        "example": "Voorbeeld van de parameter wanneer nodig, kan vaak leeg blijven"
+    }
+
+    return [exampleParameters]
 
 def customerror(errormessage, code):
     return Response('{"error":"' + errormessage + '"}', status=code, mimetype='application/json')
