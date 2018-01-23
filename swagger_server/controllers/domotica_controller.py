@@ -48,14 +48,33 @@ def domotica_domoticaid_post(domoticaid):
     value = domoticaobject['VALUES']
 
     try:
-        r = requests.get('http://'+username+":"+password+"@"+ipadresswebserver
-                         +"/cgi-bin/scada-remote/request.cgi?m=json&r=grp&fn=write&alias="+groupadress+"&value="+value)
-    except:
-        return customerror("HomeLynk kan niet bereikt worden", 500)
+        on = False
+        try:
+            statuslampjes = requests.get(ipadresswebserver+ '/leds')
+            ledjes = statuslampjes.text.replace("\"", "").replace("{","").replace("}","").replace("\n","").replace(" ", "").split(":")
+
+
+            if ledjes[-1] == "1,":
+                on = True
+            else:
+                on = False
+        except Exception as e:
+            return customerror("Fout bij het ophalen van de huidige LED status", str(e), 500)
+
+
+        if on:
+            leds = '{ "Led1": 0, "Led2": 0, "Led3": 0}'
+        else:
+            leds = '{ "Led1": 1, "Led2": 1, "Led3": 1}'
+
+        r = requests.put(ipadresswebserver + '/leds', data=leds)
+
+    except Exception as e:
+        return customerror("Fout bij het switchen van de status", str(e), 500)
 
     domoticafile.close()
 
-    return customerror("Fantastisch!", 400)
+    return succesfulloperation("Fantastisch!", 200)
 
 def domotica_get():
     """
@@ -67,8 +86,11 @@ def domotica_get():
     with open("domotica-items.txt", "r") as domoticafile:
         return domoticafile.read()
 
-def customerror(errormessage, code):
-    return Response('{"error":"' + errormessage + '"}', status=code, mimetype='application/json')
+def customerror(errormessage, exception, code):
+    return Response(' {"error":"' + errormessage + '", "exception":"' + exception + '"}', status=code, mimetype='application/json')
+
+def succesfulloperation(message, code):
+    return Response('{"message":"' + message + '"}', status=code, mimetype='application/json')
 
 def createObject(inputstring, outputstr):
     objectcomponents = outputstr.replace(" ", "").split("|")
