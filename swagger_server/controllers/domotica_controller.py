@@ -54,23 +54,33 @@ def domotica_domoticaid_post(domoticaid, state=None):
         on = False
         try:
             statuslampjes = requests.get(ipadresswebserver+ '/leds', timeout=0.2)
+        except Exception as e:
+            return customerror("Fout bij het ophalen van de huidige LED status", str(e), 500)
+
+        try:
             ledjes = statuslampjes.text.replace("\"", "").replace("{","").replace("}","").replace("\n","").replace(" ", "").split(":")
 
+        except Exception as e:
+            return customerror("Fout bij het parsen van de status van de lampen", str(e), 500)
 
+        if(state != None):
+            leds = '{ "Led1": '+str(state)+ ', "Led2": '+str(state)+', "Led3": '+str(state)+'}'
+            r = requests.put(ipadresswebserver + '/leds', data=leds)
+
+            return succesfulloperation("Fantastisch!", 200)
+
+        else:
             if ledjes[-1] == "1,":
                 on = True
             else:
                 on = False
-        except Exception as e:
-            return customerror("Fout bij het ophalen van de huidige LED status", str(e), 500)
-
 
         if on:
             leds = '{ "Led1": 0, "Led2": 0, "Led3": 0}'
         else:
             leds = '{ "Led1": 1, "Led2": 1, "Led3": 1}'
 
-        r = requests.put(ipadresswebserver + '/leds', data=leds)
+            r = requests.put(ipadresswebserver + '/leds', data=leds)
 
     except Exception as e:
         return customerror("Fout bij het switchen van de status", str(e), 500)
