@@ -1,7 +1,7 @@
 #HomeLynk credentials
 homeLynkUsername ="testuser"
 homeLynkPassword = "testpassword"
-homeLynkIP = 'http://192.168.1.133'
+homeLynkIP = 'http://192.168.1.102'
 
 #MySQL credentials
 databaseIP =  '172.17.0.3'

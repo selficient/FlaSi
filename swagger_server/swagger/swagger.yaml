@@ -59,6 +59,11 @@ paths:
         description: "Numeric ID of the Domotica to activate"
         required: true
         type: "integer"
+      - name: "state"
+        in: "query"
+        description: "state of the item"
+        required: false
+        type: "integer"
       responses:
         200:
           description: "Succesful response"

@@ -5,6 +5,7 @@ from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
+
 import config
 import pymysql
 from flask import Response
@@ -26,7 +27,7 @@ def query_execute_post(Parameters):
     # config.py holds all information that is needed to initialise the MySQL database
     connection = pymysql.connect(host=config.databaseIP, port=config.databasePort, user=config.databaseUsername,
                                  passwd=config.databasePassword, db=config.databaseDatabasename)
-	
+
     try:
         cursor = connection.cursor()
     except:

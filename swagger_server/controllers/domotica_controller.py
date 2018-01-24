@@ -28,13 +28,14 @@ def domotica_domoticaid_get(domoticaid):
 
     return customerror("Geen item gevonden met dit ID", 501)
 
-
-def domotica_domoticaid_post(domoticaid):
+def domotica_domoticaid_post(domoticaid, state=None):
     """
     domotica_domoticaid_post
     Activates a specific domotica object
     :param domoticaid: Numeric ID of the Domotica to activate
     :type domoticaid: int
+    :param state: state of the item
+    :type state: int
 
     :rtype: None
     """
@@ -52,7 +53,7 @@ def domotica_domoticaid_post(domoticaid):
     try:
         on = False
         try:
-            statuslampjes = requests.get(ipadresswebserver+ '/leds')
+            statuslampjes = requests.get(ipadresswebserver+ '/leds', timeout=0.2)
             ledjes = statuslampjes.text.replace("\"", "").replace("{","").replace("}","").replace("\n","").replace(" ", "").split(":")
 
 

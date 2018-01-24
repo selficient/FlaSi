@@ -28,8 +28,10 @@ class TestDomoticaController(BaseTestCase):
 
         
         """
+        query_string = [('state', 56)]
         response = self.client.open('/domotica/{domoticaid}'.format(domoticaid=56),
-                                    method='POST')
+                                    method='POST',
+                                    query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
     def test_domotica_get(self):
