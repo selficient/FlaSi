@@ -9,6 +9,7 @@ from ..util import deserialize_date, deserialize_datetime
 import requests
 from flask import Response
 import config
+
 def domotica_domoticaid_get(domoticaid):
     """
     domotica_domoticaid_get
@@ -39,6 +40,7 @@ def domotica_domoticaid_post(domoticaid):
     """
     domoticafile = open("domotica-items.txt", "r")
 
+    # Username and password for the HomeLynk are stored in cpnfig.py
     username = config.homeLynkUsername
     password = config.homeLynkPassword
     ipadresswebserver = config.homeLynkIP
@@ -93,11 +95,12 @@ def succesfulloperation(message, code):
     return Response('{"message":"' + message + '"}', status=code, mimetype='application/json')
 
 def createObject(inputstring, outputstr):
+    #create object based on the inputstring and refactores it to return a dictionary
     objectcomponents = outputstr.replace(" ", "").split("|")
     objectkeys = inputstring.replace(" ", "").split("|")
-    newdictionary = {}
+    objectDictionary = {}
     counter = 0
     for key in objectkeys:
-        newdictionary[key] = objectcomponents[counter]
+        objectDictionary[key] = objectcomponents[counter]
         counter += 1
-    return newdictionary
+    return objectDictionary

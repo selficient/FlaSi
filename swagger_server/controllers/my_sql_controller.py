@@ -23,6 +23,7 @@ def query_execute_post(Parameters):
 
     query = ""
 
+    # config.py holds all information that is needed to initialise the MySQL database
     connection = pymysql.connect(host=config.databaseIP, port=config.databasePort, user=config.databaseUsername,
                                  passwd=config.databasePassword, db=config.databaseDatabasename)
 	
@@ -83,10 +84,13 @@ def query_get():
     return [exampleParameters]
 
 def customerror(errormessage, code):
+    # returns customised error after methods get initialised
     return Response('{"error":"' + errormessage + '"}', status=code, mimetype='application/json')
 
 def createObject(columnames, data):
-    newList = []
+    # creates an object based on the columndates and data
+    # returns object that can be requested on Postman
+    emptyList = []
     lengthOfColumns = len(columnames)
     if(lengthOfColumns != 0):
         for row in data:
@@ -98,6 +102,6 @@ def createObject(columnames, data):
                 if counter > lengthOfColumns:
                     break
 
-            newList.append(object)
+            emptyList.append(object)
 
     return newList
