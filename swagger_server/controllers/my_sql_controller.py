@@ -104,4 +104,4 @@ def createObject(columnames, data):
 
             emptyList.append(object)
 
-    return newList
+    return emptyList
