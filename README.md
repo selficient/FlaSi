@@ -49,3 +49,4 @@ Current version:
 | 0.1      | 20 November   |
 | 0.2      | 20 December   |
 | 0.3      | 15 Januari    |
+| 0.4      | 23 Januari    |
