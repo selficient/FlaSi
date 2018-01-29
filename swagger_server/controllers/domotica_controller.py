@@ -26,7 +26,7 @@ def domotica_domoticaid_get(domoticaid):
                 if items[0] == str(domoticaid):
                     return createObject(inputstring,line)
 
-    return customerror("Geen item gevonden met dit ID", 501)
+    return customerror("Geen item gevonden met dit ID","Niet echt een error maar kon gewoon niks voor je vinden xx", 501)
 
 def domotica_domoticaid_post(domoticaid, state=None):
     """
@@ -47,7 +47,10 @@ def domotica_domoticaid_post(domoticaid, state=None):
     ipadresswebserver = config.homeLynkIP
 
     domoticaobject = domotica_domoticaid_get(domoticaid)
-    groupadress = domoticaobject['GROUP']
+    try:
+        groupadress = domoticaobject['GROUP']
+    except:
+        return domoticaobject
     value = domoticaobject['VALUES']
 
     try:
