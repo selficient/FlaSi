@@ -24,10 +24,13 @@ sudo pip install tox
 tox
 ```
 
-## Starten met Docker
+## Starten met of zonder Docker
+Om de server normaal te starten gebruik je het volgende commando vanaf de root:
+```
+python3 -m swagger_server
+```
 
-To run the server on a Docker container, please execute the following from the root directory:
-
+Om de docker container te starten gebruik je de volgende commando van de root
 ```bash
 # Container bouwen
 docker build -t swagger_server .
