@@ -25,6 +25,11 @@ tox
 ```
 
 ## Starten met of zonder Docker
+Check allereerst of je alle dependencies vanuit de requirements.txt hebt geinstalleerd met 
+```
+pip3 install -r requirements.txt
+```
+
 Om de server normaal te starten gebruik je het volgende commando vanaf de root:
 ```
 python3 -m swagger_server
@@ -53,3 +58,6 @@ Current version:
 | 0.2      | 20 December   |
 | 0.3      | 15 Januari    |
 | 0.4      | 23 Januari    |
+| 1.0*     | 29 Januari    |
+
+* Latest stable build
